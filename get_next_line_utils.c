@@ -6,15 +6,15 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:13:53 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/25 12:48:59 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:20:26 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strlen(const char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -47,8 +47,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	int		i;
 	int		j;
 
-	if (!s1 || !s2)
-		return (NULL);
+//	if (!s1 || !s2)
+//		return (NULL);
 	res = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
@@ -63,7 +63,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, int start, int len)
 {
 	char	*res;
 	int		i;
@@ -71,17 +71,19 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (!len || !ft_strlen(s) || start > ft_strlen(s) - 1)
-	{
-		res = malloc(1 * sizeof(char));
-		*res = '\0';
-		return (res);
-	}
+	if (len < 0 || start < 0)
+		return ("");
+//	if (!len || !ft_strlen(s) || start > ft_strlen(s) - 1)
+//	{
+//		res = malloc(1 * sizeof(char));
+//		*res = '\0';
+//		return (res);
+//	}
 	if (len > ft_strlen(s) - start)
 		new_len = ft_strlen(s) - start;
 	else
 		new_len = len;
-	res = malloc((new_len + 1) * sizeof(char));
+	res = malloc((new_len + 1) * sizeof(char)); // possible leak here if buf is fulled of trig
 	if (!res)
 		return (NULL);
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:10:27 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/25 13:05:13 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:20:40 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@
 # define BUFFER_SIZE 1
 #endif
 
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdlib.h>
+# include <unistd.h>
+# define TRIG -1
 
 char	*get_next_line(int fd);
-size_t	ft_strlen(const char *s);
+int		ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_substr(char const *s, int start, int len);
 
 #endif
