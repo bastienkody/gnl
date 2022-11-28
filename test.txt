@@ -1,4 +1,4 @@
-ligne_0
+ligne_0end of line 0
 ligne_1
 ligne_2
 ligne_3

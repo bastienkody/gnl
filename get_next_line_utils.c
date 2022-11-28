@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:13:53 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/25 19:20:26 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/28 15:46:09 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ char	*ft_substr(char const *s, int start, int len)
 	int		i;
 	int		new_len;
 
-	if (!s)
-		return (NULL);
-	if (len < 0 || start < 0)
-		return ("");
+//	if (!s)
+//		return (NULL);
+//	if (len < 0 || start < 0)
+//		return ("");
 //	if (!len || !ft_strlen(s) || start > ft_strlen(s) - 1)
 //	{
 //		res = malloc(1 * sizeof(char));
