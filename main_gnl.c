@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:12:03 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/29 19:29:46 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:57:35 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 // Pour lire plusieurs lignes merci de specifier ce nombre en unique argument de l'executable
 
-int	main(int argc, char **argv)
+in	main(int argc, char **argv)
 {
 	int		line_to_read;
 	int		fd;
