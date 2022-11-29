@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:09:52 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/28 19:19:48 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:44:47 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	idx_of(char *buf, char c)
 	return (-1);
 }
 
-int	idx_trig(char *buf)
+int	itrig(char *buf)
 {
 	int	i;
 
@@ -37,42 +37,58 @@ int	idx_trig(char *buf)
 	return (i);
 }
 
+char	*init(char **line, char buf[], int *eof)
+{
+	buf[BUFFER_SIZE] = '\0';
+	*eof = 1;
+	*line = malloc(sizeof(char));
+	if (!*line)
+		return (NULL);
+	**line = '\0';
+	return (*line);
+}
+
+void	clr_buf(char buf[], int j, char val)
+{
+	int	i;
+
+	i = -1;
+	if (j < 0) // eof est atteint
+	{
+		while (++i < BUFFER_SIZE)
+			buf[i] = val;
+		return ;
+	}
+	while (++i <= j)
+		buf[i] = val;
+	return ;
+}
+
 char	*get_next_line(int fd)
 {
 	static char		buf[BUFFER_SIZE + 1];
-	char			*cache;
+	char			*line;
 	int				j;
 	int				eof;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	line = NULL;
+	if (fd < 0 || BUFFER_SIZE <= 0 || !init(&line, buf, &eof))
 		return (NULL);
-	cache = "";
-	buf[BUFFER_SIZE] = '\0';
-	eof = 1;
 	while (eof > 0)
 	{
 		j = idx_of(buf, '\n');
 		if (j != -1)
 		{
-			cache = ft_strjoin(cache, ft_substr(buf, idx_trig(buf), j + 1 - idx_trig(buf))); // leaks
-			while (j > -1)
-				buf[j--] = TRIG;
-			return (cache);
+			line = strj(line, subs(buf, itrig(buf), j + 1 - itrig(buf)));
+			clr_buf(buf, j, TRIG);
+			return (line);
 		}
-		else
-			cache = ft_strjoin(cache, ft_substr(buf, idx_trig(buf), ft_strlen(buf) - idx_trig(buf))); // leaks
-		eof = read(fd, buf, BUFFER_SIZE);
+		line = strj(line, subs(buf, itrig(buf), strle(buf) - itrig(buf)));
+		if (!line)
+			return (NULL);
+		eof = readnl(fd, buf);
 	}
-// si on eneleve la condition ci dessous on perd la derniere ligne si pas de \n en derniere ligne
-// si on la laisse on continue a iterer sur les derniers char de buf (entre les trig et la fin de fichier sans \n)
-// on pourrait laisser eof en static mais pas sur que ca aide en plus une seule var static
-// il faudrait operer qch de special pour le clear du buf lorsque eof = 0
-// il va falloir decouper en fonctionnalites anyway : 
-//  - le clear du buffer (peut on se passer de j? ce serait cool... je pense que oui)
-//  - l'assignation a cache egalement? 
-//  - renommer cache en ligne aussi 
-	if (!eof)
-		return (cache);
-	else // eof < 0
-		return (NULL); // free_all needed?
+	if (eof < 0)
+		return (finall(line, buf, eof)); // free_cache needed?
+	return (finall(line, buf, eof));
 }

@@ -6,25 +6,27 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:10:27 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/25 19:20:40 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:44:17 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
 # define TRIG -1
 
+void	clr_buf(char buf[], int j, char val);
+int		strle(const char *s);
+int		readnl(int fd, char buf[]);
+char	*finall(char *line, char buf[], int eof);
 char	*get_next_line(int fd);
-int		ft_strlen(const char *s);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strjoin(char const *s1, char const *s2);
-char	*ft_substr(char const *s, int start, int len);
+char	*strj(char *s1, char *s2);
+char	*subs(char *s, int start, int len);
 
 #endif

@@ -6,13 +6,30 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:13:53 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/28 15:46:09 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:44:34 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	ft_strlen(const char *s)
+int	readnl(int fd, char buf[])
+{
+	clr_buf(buf, -1, '\0');
+	return (read(fd, buf, BUFFER_SIZE));
+}
+
+char	*finall(char *line, char buf[], int eof)
+{
+	if (eof < 0)
+	{
+		free(line);
+		return (NULL);
+	}
+	clr_buf(buf, -1, '\0');
+	return (line);
+}
+
+int	strle(const char *s)
 {
 	int	i;
 
@@ -22,34 +39,13 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	size_t	slen;
-	char	*s_tmp;
-
-	if (!s)
-		return (NULL);
-	slen = ft_strlen(s);
-	s_tmp = (char *) s;
-	c = (char) c;
-	while (slen--)
-	{
-		if (*s_tmp == c)
-			return (s_tmp);
-		s_tmp++;
-	}
-	return (NULL);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*strj(char *s1, char *s2)
 {
 	char	*res;
 	int		i;
 	int		j;
 
-//	if (!s1 || !s2)
-//		return (NULL);
-	res = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	res = malloc((strle(s1) + strle(s2) + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	i = -1;
@@ -60,30 +56,22 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[++i])
 			res[++j] = s2[i];
 	res[++j] = '\0';
+	free(s1);
+	free(s2);
 	return (res);
 }
 
-char	*ft_substr(char const *s, int start, int len)
+char	*subs(char *s, int start, int len)
 {
 	char	*res;
 	int		i;
 	int		new_len;
 
-//	if (!s)
-//		return (NULL);
-//	if (len < 0 || start < 0)
-//		return ("");
-//	if (!len || !ft_strlen(s) || start > ft_strlen(s) - 1)
-//	{
-//		res = malloc(1 * sizeof(char));
-//		*res = '\0';
-//		return (res);
-//	}
-	if (len > ft_strlen(s) - start)
-		new_len = ft_strlen(s) - start;
+	if (len > strle(s) - start)
+		new_len = strle(s) - start;
 	else
 		new_len = len;
-	res = malloc((new_len + 1) * sizeof(char)); // possible leak here if buf is fulled of trig
+	res = malloc((new_len + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
 	i = -1;
