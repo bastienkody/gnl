@@ -1,0 +1,1 @@
+START La seule et unique ligne sans retour a la ligne   END
