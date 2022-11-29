@@ -6,13 +6,15 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:12:03 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/29 18:56:52 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:29:46 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <fcntl.h>
 #include "get_next_line.h"
+
+// Pour lire plusieurs lignes merci de specifier ce nombre en unique argument de l'executable
 
 int	main(int argc, char **argv)
 {
@@ -25,7 +27,7 @@ int	main(int argc, char **argv)
 		line_to_read = atoi(argv[1]);
 	else
 		(void) argv;
-	fd = open("testeeeee.txt", O_RDONLY);
+	fd = open("test3.txt", O_RDONLY);
 	if (fd < 0)
 	{
 		printf("fd < 0\nExiting program ...");

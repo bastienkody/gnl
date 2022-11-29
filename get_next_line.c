@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:09:52 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/29 18:44:47 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/29 19:55:27 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	clr_buf(char buf[], int j, char val)
 	int	i;
 
 	i = -1;
-	if (j < 0) // eof est atteint
+	if (j < 0)
 	{
 		while (++i < BUFFER_SIZE)
 			buf[i] = val;
@@ -89,6 +89,6 @@ char	*get_next_line(int fd)
 		eof = readnl(fd, buf);
 	}
 	if (eof < 0)
-		return (finall(line, buf, eof)); // free_cache needed?
+		return (finall(line, buf, eof));
 	return (finall(line, buf, eof));
 }
