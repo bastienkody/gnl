@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:10:27 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/29 18:44:17 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:01:54 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,12 @@
 # include <unistd.h>
 # define TRIG -1
 
-void	clr_buf(char buf[], int j, char val);
 int		strle(const char *s);
+int		idx_of(char *buf, char c);
+int		itrig(char *buf);
 int		readnl(int fd, char buf[]);
+void	clr_buf(char buf[], int j, char val);
+char	*init(char **line, char buf[], int *eof);
 char	*finall(char *line, char buf[], int eof);
 char	*get_next_line(int fd);
 char	*strj(char *s1, char *s2);

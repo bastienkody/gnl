@@ -6,36 +6,11 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:09:52 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/29 19:55:27 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/30 14:07:33 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-int	idx_of(char *buf, char c)
-{
-	int	i;
-
-	i = -1;
-	while (buf[++i])
-	{
-		if (buf[i] == c)
-			return (i);
-	}
-	return (-1);
-}
-
-int	itrig(char *buf)
-{
-	int	i;
-
-	i = 0;
-	if (*buf != -1)
-		return (i);
-	while (buf[i] == TRIG)
-		i++;
-	return (i);
-}
 
 char	*init(char **line, char buf[], int *eof)
 {
@@ -46,6 +21,12 @@ char	*init(char **line, char buf[], int *eof)
 		return (NULL);
 	**line = '\0';
 	return (*line);
+}
+
+int	readnl(int fd, char buf[])
+{
+	clr_buf(buf, -1, '\0');
+	return (read(fd, buf, BUFFER_SIZE));
 }
 
 void	clr_buf(char buf[], int j, char val)
@@ -62,6 +43,17 @@ void	clr_buf(char buf[], int j, char val)
 	while (++i <= j)
 		buf[i] = val;
 	return ;
+}
+
+char	*finall(char *line, char buf[], int eof)
+{
+	if (eof < 0)
+	{
+		free(line);
+		return (NULL);
+	}
+	clr_buf(buf, -1, '\0');
+	return (line);
 }
 
 char	*get_next_line(int fd)

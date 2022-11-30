@@ -6,27 +6,35 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:13:53 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/29 18:44:34 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/30 13:30:46 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	readnl(int fd, char buf[])
+int	idx_of(char *buf, char c)
 {
-	clr_buf(buf, -1, '\0');
-	return (read(fd, buf, BUFFER_SIZE));
+	int	i;
+
+	i = -1;
+	while (buf[++i])
+	{
+		if (buf[i] == c)
+			return (i);
+	}
+	return (-1);
 }
 
-char	*finall(char *line, char buf[], int eof)
+int	itrig(char *buf)
 {
-	if (eof < 0)
-	{
-		free(line);
-		return (NULL);
-	}
-	clr_buf(buf, -1, '\0');
-	return (line);
+	int	i;
+
+	i = 0;
+	if (*buf != -1)
+		return (i);
+	while (buf[i] == TRIG)
+		i++;
+	return (i);
 }
 
 int	strle(const char *s)
