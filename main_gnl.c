@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 13:12:03 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/30 17:31:49 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/30 18:02:12 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #include <fcntl.h>
 #include "get_next_line.h"
 
-// Pour lire plusieurs lignes merci de specifier ce nombre en unique argument de l'executable
-// Pour lire plusieurs lignes dans un ficher merci de specifier le nombre en 1er argument et le file en second (relative or absolute path)
+// Lire plusieurs lignes --> nombre de lignes en unique argument
+// Lire dans un ficher --> nombre en 1er argument et file en 2eme
 
 
 int	main(int argc, char **argv)

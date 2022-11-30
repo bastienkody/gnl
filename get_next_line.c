@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:09:52 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/30 17:31:22 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:43:43 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,30 +47,15 @@ void	clr_buf(char buf[], int j, char val)
 
 char	*finall(char *line, char buf[], int eof)
 {
-	int	i;
-	int	end;
-
-	if (eof < 0)
+	if (eof < 0 || !strle(line))
 	{
 		free(line);
 		return (NULL);
-	}
-	end = 0;
-	i = -1;
-	while (++i < BUFFER_SIZE)
-	{
-		if (buf[i] != '\0')
-			end = 1;
-	}
-	if (end)
-	{
-		clr_buf(buf, -1, '\0');
-		return (line);
 	}
 	else
 	{
-		free(line);
-		return (NULL);
+		clr_buf(buf, -1, '\0');
+		return (line);
 	}
 }
 
