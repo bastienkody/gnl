@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:09:52 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/30 17:18:02 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/11/30 17:31:22 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ char	*finall(char *line, char buf[], int eof)
 		return (line);
 	}
 	else
+	{
+		free(line);
 		return (NULL);
+	}
 }
 
 char	*get_next_line(int fd)
