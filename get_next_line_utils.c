@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:13:53 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/30 13:30:46 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:26:06 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ char	*strj(char *s1, char *s2)
 	int		i;
 	int		j;
 
+	if (!s1 && !s2)
+		return (NULL);
 	res = malloc((strle(s1) + strle(s2) + 1) * sizeof(char));
 	if (!res)
 		return (NULL);
@@ -75,6 +77,8 @@ char	*subs(char *s, int start, int len)
 	int		i;
 	int		new_len;
 
+	if (!s)
+		return (NULL);
 	if (len > strle(s) - start)
 		new_len = strle(s) - start;
 	else

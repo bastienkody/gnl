@@ -6,7 +6,7 @@
 /*   By: bguillau <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 12:09:52 by bguillau          #+#    #+#             */
-/*   Updated: 2022/11/30 17:43:43 by bguillau         ###   ########.fr       */
+/*   Updated: 2022/12/01 14:21:02 by bguillau         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,15 @@ char	*init(char **line, char buf[], int *eof)
 	return (*line);
 }
 
-int	readnl(int fd, char buf[])
-{
-	clr_buf(buf, -1, '\0');
-	return (read(fd, buf, BUFFER_SIZE));
-}
-
 void	clr_buf(char buf[], int j, char val)
 {
 	int	i;
 
-	i = -1;
 	if (j < 0)
-	{
-		while (++i < BUFFER_SIZE)
-			buf[i] = val;
-		return ;
-	}
-	while (++i <= j)
-		buf[i] = val;
-	return ;
+		j = BUFFER_SIZE - 1;
+	i = 0;
+	while (buf[i] && i <= j)
+		buf[i++] = val;
 }
 
 char	*finall(char *line, char buf[], int eof)
@@ -81,9 +70,8 @@ char	*get_next_line(int fd)
 		line = strj(line, subs(buf, itrig(buf), strle(buf) - itrig(buf)));
 		if (!line)
 			return (NULL);
-		eof = readnl(fd, buf);
+		clr_buf(buf, -1, '\0');
+		eof = read(fd, buf, BUFFER_SIZE);
 	}
-	if (eof < 0)
-		return (finall(line, buf, eof));
 	return (finall(line, buf, eof));
 }
